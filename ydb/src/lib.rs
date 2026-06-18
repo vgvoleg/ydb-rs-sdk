@@ -90,8 +90,8 @@ mod table_service_types;
 mod test_integration_helper;
 #[cfg(test)]
 pub(crate) mod topics_test;
-mod trace_helpers;
 mod trait_operation;
+pub(crate) mod traces;
 pub(crate) mod transaction;
 mod types;
 mod types_converters;

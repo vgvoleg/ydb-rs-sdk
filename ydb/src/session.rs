@@ -28,7 +28,7 @@ use crate::grpc_wrapper::raw_table_service::explain_data_query::RawExplainDataQu
 use crate::grpc_wrapper::raw_table_service::keepalive::RawKeepAliveRequest;
 use crate::grpc_wrapper::raw_table_service::rollback_transaction::RawRollbackTransactionRequest;
 use crate::table_service_types::{ColumnDescription, CopyTableItem, TableDescription};
-use crate::trace_helpers::ensure_len_string;
+use crate::traces::helpers::ensure_len_string;
 use tracing::{debug, trace};
 use ydb_grpc::ydb_proto::table::v1::table_service_client::TableServiceClient;
 use ydb_grpc::ydb_proto::table::{execute_scan_query_request, ExecuteScanQueryRequest};
@@ -223,7 +223,7 @@ impl Session {
         };
         debug!(
             "request: {}",
-            crate::trace_helpers::ensure_len_string(serde_json::to_string(&req)?)
+            crate::traces::helpers::ensure_len_string(serde_json::to_string(&req)?)
         );
         let mut channel = self.get_channel().await?;
         let resp = channel.stream_execute_scan_query(req).await?;
